@@ -16,7 +16,7 @@ const Signup = () => {
     e.preventDefault();
     // Replace with actual signup logic
     try {
-      const response = await fetch('/api/signup', {
+      const response = await fetch('https://manga.asfischolar.org/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
