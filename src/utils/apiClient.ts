@@ -6,7 +6,7 @@ export const useApiClient = () => {
 
   const get = async (url: string) => {
     const token = getAuthToken();
-    const response = await fetch(`http://localhost:16000${url}`, {
+    const response = await fetch(`https://manga.asfischolar.org${url}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
@@ -26,7 +26,7 @@ export const useApiClient = () => {
       headers['Content-Type'] = 'application/json';
     }
 
-    const response = await fetch(`http://localhost:16000${url}`, {
+    const response = await fetch(`https://manga.asfischolar.org${url}`, {
       method: 'POST',
       headers,
       body: isFormData ? body : JSON.stringify(body)

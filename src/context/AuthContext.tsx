@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           
           // Optional: Validate token with backend on refresh
           try {
-            const response = await fetch('http://localhost:16000/loggedIn', {
+            const response = await fetch('https://manga.asfischolar.org/loggedIn', {
               method: 'POST',
               headers: {
                 'Authorization': `Bearer ${parsedUser.token}`,
@@ -64,7 +64,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await fetch('http://localhost:16000/login', {
+      const response = await fetch('https://manga.asfischolar.org/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

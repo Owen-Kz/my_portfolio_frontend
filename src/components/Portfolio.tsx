@@ -30,7 +30,7 @@ const Portfolio = () => {
         setIsLoading(true);
         const categoryParam = selectedCategory === 'All' ? '' : `&category=${selectedCategory}`;
         const response = await fetch(
-          `http://localhost:16000/files?page=${currentPage}&limit=${itemsPerPage}${categoryParam}`
+          `https://manga.asfischolar.org/files?page=${currentPage}&limit=${itemsPerPage}${categoryParam}`
         );
         
         if (!response.ok) {
