@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Eye, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Portfolio = () => {
   // State management
@@ -23,7 +24,7 @@ const Portfolio = () => {
   const itemsPerPage = 6;
   const categories = ['All', 'Branding', 'UI/UX', 'Print Design', 'Web Design', 'Illustration'];
 
-  // Fetch portfolio items with pagination and filtering
+  // Fetch portfolio items
   useEffect(() => {
     const fetchPortfolioItems = async () => {
       try {
@@ -33,13 +34,10 @@ const Portfolio = () => {
           `https://manga.asfischolar.org/files?page=${currentPage}&limit=${itemsPerPage}${categoryParam}`
         );
         
-        if (!response.ok) {
-          throw new Error('Failed to fetch portfolio items');
-        }
+        if (!response.ok) throw new Error('Failed to fetch portfolio items');
         
         const data = await response.json();
         
-        // Update items based on whether it's a new category or pagination
         if (currentPage === 1) {
           setPortfolioItems(data.items);
         } else {
@@ -48,7 +46,7 @@ const Portfolio = () => {
         
         setTotalPages(data.pagination.totalPages);
         
-        // Initialize image indices for new items
+        // Initialize image indices
         const newIndices = {...currentImageIndices};
         data.items.forEach(item => {
           if (!newIndices[item.id]) {
@@ -58,7 +56,6 @@ const Portfolio = () => {
         setCurrentImageIndices(newIndices);
       } catch (err) {
         setError(err.message);
-        console.error('Error fetching portfolio items:', err);
       } finally {
         setIsLoading(false);
       }
@@ -67,12 +64,12 @@ const Portfolio = () => {
     fetchPortfolioItems();
   }, [currentPage, selectedCategory]);
 
-  // Reset to first page when category changes
+  // Reset page when category changes
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedCategory]);
 
-  // Handle auto slide in modal
+  // Auto slide effect
   useEffect(() => {
     let interval;
     if (isModalOpen && autoSlide && portfolioItems.length > 0) {
@@ -89,9 +86,7 @@ const Portfolio = () => {
 
   // Navigation functions
   const loadMoreItems = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(prev => prev + 1);
-    }
+    if (currentPage < totalPages) setCurrentPage(prev => prev + 1);
   };
 
   const openModal = (index) => {
@@ -106,15 +101,11 @@ const Portfolio = () => {
   };
 
   const goToPrevItem = () => {
-    setCurrentItemIndex(prev => 
-      prev === 0 ? portfolioItems.length - 1 : prev - 1
-    );
+    setCurrentItemIndex(prev => prev === 0 ? portfolioItems.length - 1 : prev - 1);
   };
 
   const goToNextItem = () => {
-    setCurrentItemIndex(prev => 
-      prev === portfolioItems.length - 1 ? 0 : prev + 1
-    );
+    setCurrentItemIndex(prev => prev === portfolioItems.length - 1 ? 0 : prev + 1);
   };
 
   const goToPrevImage = (itemId) => {
@@ -137,27 +128,16 @@ const Portfolio = () => {
     });
   };
 
-  const toggleAutoSlide = () => {
-    setAutoSlide(prev => !prev);
-  };
+  const toggleAutoSlide = () => setAutoSlide(prev => !prev);
 
-  // Touch event handlers
-  const handleTouchStart = (e) => {
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchMove = (e) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
+  // Touch handlers
+  const handleTouchStart = (e) => setTouchStart(e.targetTouches[0].clientX);
+  const handleTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
   const handleTouchEnd = () => {
     if (portfolioItems.length === 0) return;
     const currentItem = portfolioItems[currentItemIndex];
-    if (touchStart - touchEnd > 100) {
-      goToNextImage(currentItem.id);
-    } else if (touchStart - touchEnd < -100) {
-      goToPrevImage(currentItem.id);
-    }
+    if (touchStart - touchEnd > 100) goToNextImage(currentItem.id);
+    if (touchStart - touchEnd < -100) goToPrevImage(currentItem.id);
   };
 
   // Close modal when clicking outside
@@ -168,13 +148,8 @@ const Portfolio = () => {
       }
     };
 
-    if (isModalOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    if (isModalOpen) document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isModalOpen]);
 
   // Loading and error states
@@ -328,7 +303,7 @@ const Portfolio = () => {
               ))}
             </div>
 
-            {/* Load More Button */}
+            {/* Load More */}
             {currentPage < totalPages && (
               <div className="mt-12 text-center">
                 <button
@@ -343,7 +318,7 @@ const Portfolio = () => {
           </>
         )}
 
-        {/* Modal */}
+        {/* Modal with Mini-Previews */}
         {isModalOpen && portfolioItems.length > 0 && (
           <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
             <button 
@@ -358,20 +333,40 @@ const Portfolio = () => {
               className="relative max-w-6xl w-full max-h-[90vh]"
             >
               <div 
-                className="relative h-[70vh] overflow-hidden rounded-lg"
+                className="relative h-[70vh] overflow-hidden rounded-lg mb-4"
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
               >
-                <img 
-                  src={portfolioItems[currentItemIndex].images[currentImageIndices[portfolioItems[currentItemIndex].id]]} 
+                <motion.img 
+                  key={currentImageIndices[portfolioItems[currentItemIndex].id]}
+                  src={portfolioItems[currentItemIndex].images[currentImageIndices[portfolioItems[currentItemIndex].id]]}
                   alt={portfolioItems[currentItemIndex].title}
                   className="w-full h-full object-contain select-none"
                   draggable="false"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
                 />
                 
+                {/* Navigation arrows */}
+                <button 
+                  onClick={goToPrevItem}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 rounded-full text-white hover:bg-creative-primary transition-colors z-10"
+                >
+                  <ChevronLeft className="w-8 h-8" />
+                </button>
+                <button 
+                  onClick={goToNextItem}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 rounded-full text-white hover:bg-creative-primary transition-colors z-10"
+                >
+                  <ChevronRight className="w-8 h-8" />
+                </button>
+                
+                {/* Image position indicator */}
                 {portfolioItems[currentItemIndex].images.length > 1 && (
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                  <div className="absolute left-1/2 -translate-x-1/2 bottom-4 flex gap-2 z-10">
                     {portfolioItems[currentItemIndex].images.map((_, index) => (
                       <button
                         key={index}
@@ -389,19 +384,7 @@ const Portfolio = () => {
                   </div>
                 )}
                 
-                <button 
-                  onClick={goToPrevItem}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 rounded-full text-white hover:bg-creative-primary transition-colors z-10"
-                >
-                  <ChevronLeft className="w-8 h-8" />
-                </button>
-                <button 
-                  onClick={goToNextItem}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 rounded-full text-white hover:bg-creative-primary transition-colors z-10"
-                >
-                  <ChevronRight className="w-8 h-8" />
-                </button>
-                
+                {/* Auto-slide toggle */}
                 <button 
                   onClick={toggleAutoSlide}
                   className={`absolute left-4 bottom-4 px-4 py-2 rounded-full z-10 ${
@@ -411,6 +394,7 @@ const Portfolio = () => {
                   {autoSlide ? 'Pause' : 'Play'}
                 </button>
                 
+                {/* Image counter */}
                 {portfolioItems[currentItemIndex].images.length > 1 && (
                   <div className="absolute right-4 bottom-4 px-3 py-1 bg-black/50 rounded-full text-white z-10">
                     {currentImageIndices[portfolioItems[currentItemIndex].id] + 1} / {portfolioItems[currentItemIndex].images.length}
@@ -418,6 +402,33 @@ const Portfolio = () => {
                 )}
               </div>
               
+              {/* Mini-previews section */}
+              {portfolioItems[currentItemIndex].images.length > 1 && (
+                <div className="flex gap-2 overflow-x-auto py-2 scrollbar-hide">
+                  {portfolioItems[currentItemIndex].images.map((image, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentImageIndices(prev => ({
+                        ...prev,
+                        [portfolioItems[currentItemIndex].id]: index
+                      }))}
+                      className={`flex-shrink-0 w-20 h-20 rounded-md overflow-hidden border-2 transition-all ${
+                        index === currentImageIndices[portfolioItems[currentItemIndex].id]
+                          ? 'border-accent scale-105'
+                          : 'border-transparent hover:border-white/30'
+                      }`}
+                    >
+                      <img
+                        src={image}
+                        alt={`Thumbnail ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
+              
+              {/* Item details */}
               <div className="mt-4 text-white">
                 <div className="flex justify-between items-start mb-3">
                   <h3 className="text-2xl font-bold">
