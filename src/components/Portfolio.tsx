@@ -290,11 +290,11 @@ const Portfolio = () => {
                             e.stopPropagation();
                             openModal(index);
                           }}
-                          className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors"
+                          className="p-3 bg-black/50 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors"
                         >
                           <Eye className="w-5 h-5" />
                         </button>
-                        <button className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors">
+                        <button className="p-3 bg-black/50 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors">
                           <ExternalLink className="w-5 h-5" />
                         </button>
                       </div>
@@ -405,7 +405,7 @@ const Portfolio = () => {
                 <button 
                   onClick={toggleAutoSlide}
                   className={`absolute left-4 bottom-4 px-4 py-2 rounded-full z-10 ${
-                    autoSlide ? 'bg-accent text-white' : 'bg-white/20 text-white'
+                    autoSlide ? 'bg-accent text-white' : 'bg-black/50 text-white'
                   }`}
                 >
                   {autoSlide ? 'Pause' : 'Play'}
