@@ -5,8 +5,8 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: Github, href: "#", label: "GitHub" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
+    { icon: Github, href: "https://github.com/Owen-Kz", label: "GitHub" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/michael-owen-benson-202b5a322", label: "LinkedIn" },
     { icon: Instagram, href: "https://www.instagram.com/owenkz_official/", label: "Instagram" },
     { icon: Mail, href: "mailto:bensonmichaelowen@gmail.com", label: "Email" }
   ];
