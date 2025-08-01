@@ -41,7 +41,7 @@ const DashboardLayout = () => {
                 Upload New
               </Link>
                 <Link
-                to="/"
+                to="/" target="_blank"
                 className="group flex items-center px-2 py-2 text-sm font-medium rounded-md hover:bg-gray-100"
               >
                 <ExternalLink className="mr-3 h-5 w-5" />

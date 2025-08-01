@@ -266,7 +266,7 @@ const Portfolio = () => {
                               e.stopPropagation();
                               goToPrevImage(item.id);
                             }}
-                            className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors z-10"
+                            className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-black/50 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors z-10"
                           >
                             <ChevronLeft className="w-5 h-5" />
                           </button>
@@ -275,7 +275,7 @@ const Portfolio = () => {
                               e.stopPropagation();
                               goToNextImage(item.id);
                             }}
-                            className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors z-10"
+                            className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-black/50 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors z-10"
                           >
                             <ChevronRight className="w-5 h-5" />
                           </button>
