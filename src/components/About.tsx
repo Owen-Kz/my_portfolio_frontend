@@ -9,7 +9,10 @@ const About = () => {
     { name: "Branding & Identity", level: 88 },
     { name: "Web Design", level: 85 },
     { name: "Print Design", level: 82 },
-    { name: "Illustration", level: 78 }
+    { name: "Illustration", level: 78 },
+    { name: "Logo Design", level: 90 },
+    { name: "Visual Hierarchy", level: 95 },
+    
   ];
 
   const stats = [
