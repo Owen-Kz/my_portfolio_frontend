@@ -4,8 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Send, ExternalLink } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -143,6 +144,8 @@ const Contact = () => {
                 <Button 
                   variant="secondary" 
                   className="bg-white text-creative-primary hover:bg-white/90 font-semibold"
+                  onClick={() => window.location.href = "https://calendly.com/bensonmichaelowen/30min"}
+                  formTarget="_blank"
                 >
                   Schedule a Call
                 </Button>
@@ -219,6 +222,12 @@ const Contact = () => {
                     <Send className="ml-2 w-5 h-5" />
                   </Button>
                 </form>
+                <p className="mt-4 text-sm text-muted-foreground text-center w-full">
+                  <a href="https://forms.gle/8CTfPFa5czUdZ26f6" target="_blank" rel="noopener noreferrer" className="mt-4 flex items-center text-center w-100 text-creative-primary hover:underline">
+                    <ExternalLink className="mr-3 h-5 w-5" />
+                    Submit Your Design Brief
+                  </a>
+                </p>
               </CardContent>
             </Card>
           </div>
