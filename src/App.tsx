@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext"; // Add this import
+import { AuthProvider } from "./context/AuthContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import UploadPortfolio from "./pages/uploadPortflio";
@@ -22,26 +22,27 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <AuthProvider> {/* Wrap everything with AuthProvider */}
+        <AuthProvider>
           <Routes>
+            {/* Main portfolio routes */}
             <Route path="/" element={<Index />} />
+            <Route path="/portfolio" element={<Index />} />
+            <Route path="/about" element={<Index />} />
+            <Route path="/contact" element={<Index />} />
+
+            {/* Auth routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-
-            {/* Public upload route - remove if you want it protected */}
-            {/* <Route path="/dashboard/upload" element={<UploadPortfolio />} /> */}
 
             {/* Protected Dashboard Routes */}
             <Route element={<ProtectedRoute />}>
               <Route element={<DashboardLayout />}>
                 <Route path="/dashboard" element={<DashboardHome />} />
                 <Route path="/dashboard/portfolio" element={<PortfolioItems />} />
-                {/* If you want upload to be protected, move it here */}
                 <Route path="/dashboard/upload" element={<UploadPortfolio />} />
               </Route>
             </Route>
 
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
