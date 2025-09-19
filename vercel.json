@@ -16,7 +16,7 @@
   "routes" :[
          {
       "src": "/sitemap.xml",
-      "dest": "/api/sitemap.xml",
+      "dest": "/sitemap.xml",
       "headers": {
         "Content-Type": "application/xml; charset=utf-8"
       }
