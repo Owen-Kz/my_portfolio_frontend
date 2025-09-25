@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail, Instagram, Heart } from "lucide-react";
+import { Github, Linkedin, Mail, Instagram, Heart, } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
     { icon: Github, href: "https://github.com/Owen-Kz", label: "GitHub" },
+    { icon: "Be", href: "https://www.behance.net/wk79", label: "Behance" },
     { icon: Linkedin, href: "https://www.linkedin.com/in/michael-owen-benson-202b5a322", label: "LinkedIn" },
     { icon: Instagram, href: "https://www.instagram.com/owenkz_official/", label: "Instagram" },
     { icon: Mail, href: "mailto:bensonmichaelowen@gmail.com", label: "Email" }
@@ -48,9 +49,18 @@ const Footer = () => {
                   className="text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300 hover:scale-110"
                   asChild
                 >
-                  <a href={social.href} aria-label={social.label}>
-                    <social.icon className="w-5 h-5" />
-                  </a>
+                  {
+                    social.icon === "Be" ? (
+                      <a href={social.href} aria-label={social.label}>
+                        Be
+                      </a>
+                    ) : (
+                      <a href={social.href} aria-label={social.label}>
+                        <social.icon className="w-5 h-5" />
+                      </a>
+                    )
+                  }
+
                 </Button>
               ))}
             </div>
