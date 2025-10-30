@@ -93,7 +93,7 @@ const WebHero = () => {
           {/* Description */}
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-[#7d8590] mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed font-mono px-2">
             Crafting digital experiences with clean code, modern technologies,
-            and a passion for innovation. Specializing in full-stack development
+            and a passion for innovation. Specializing in software development
             and open-source contributions.
           </p>
 

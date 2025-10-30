@@ -20,7 +20,7 @@ const WebPortfolioIndex = () => {
           title: 'Portfolio - Dzidzom Development Projects',
           description: 'Explore my development portfolio featuring web applications, mobile apps, and full-stack projects.',
           canonicalUrl: `${baseUrl}/dev-portfolio`,
-          keywords: 'web development portfolio, react projects, full-stack development, mobile apps'
+          keywords: 'web development portfolio, react projects, full-stack development, mobile apps, software engineering'
         };
       case '/dev-about':
         return {
