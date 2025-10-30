@@ -315,7 +315,7 @@ const Navigation = () => {
       </div>
 
       {/* Bottom padding for mobile to prevent content from being hidden behind navbar */}
-      <div className="md:hidden pb-16 sm:pb-20"></div>
+      <div className="md:hidden pb-16 sm:pb-20 bg-black"></div>
     </>
   );
 };
