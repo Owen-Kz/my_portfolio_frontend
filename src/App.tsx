@@ -13,6 +13,9 @@ import DashboardLayout from "./pages/dashboard/DashboardLayout";
 import DashboardHome from "./pages/dashboard/DashboardHome";
 import PortfolioItems from "./pages/dashboard/PortfolioItems";
 import ProtectedRoute from "./components/ProtectedRoute";
+import WebPortfolioIndex from "./pages/WebPortfolioIndex";
+import DevDashboard from "./pages/dashboard/web/DashboardWeb";
+import UploadDevPortfolio from "./pages/dashboard/web/UploadDevPortfolio";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +32,12 @@ const App = () => (
             <Route path="/portfolio" element={<Index />} />
             <Route path="/about" element={<Index />} />
             <Route path="/contact" element={<Index />} />
+            <Route path="/webapps" element={<WebPortfolioIndex />} />
+
+            {/* for dev portfolio  */}
+            <Route path="/dev-portfolio" element={<WebPortfolioIndex />} />
+            <Route path="/dev-about" element={<WebPortfolioIndex />} />
+            <Route path="/dev-contact" element={<WebPortfolioIndex />} />
 
             {/* Auth routes */}
             <Route path="/login" element={<Login />} />
@@ -40,6 +49,8 @@ const App = () => (
                 <Route path="/dashboard" element={<DashboardHome />} />
                 <Route path="/dashboard/portfolio" element={<PortfolioItems />} />
                 <Route path="/dashboard/upload" element={<UploadPortfolio />} />
+                <Route path="/dashboard/dev" element={<DevDashboard />} />
+                <Route path="/dashboard/upload/dev" element={<UploadDevPortfolio />} />
               </Route>
             </Route>
 

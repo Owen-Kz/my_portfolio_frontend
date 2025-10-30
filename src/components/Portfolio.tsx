@@ -182,10 +182,10 @@ const Portfolio = () => {
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
             My Portfolio
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-l text-muted-foreground max-w-3xl mx-auto">
             A collection of my latest design projects showcasing creativity, innovation, and attention to detail.
           </p>
         </div>
@@ -196,7 +196,7 @@ const Portfolio = () => {
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+              className={`px-4 py-1 rounded-full font-medium text-sm transition-all duration-300 ${
                 selectedCategory === category
                   ? 'bg-creative-primary text-white shadow-creative'
                   : 'bg-secondary text-secondary-foreground hover:bg-creative-primary/10 hover:text-creative-primary'
@@ -278,7 +278,7 @@ const Portfolio = () => {
                   
                   <CardContent className="p-6">
                     <div className="flex justify-between items-start mb-3">
-                      <h3 className="text-xl font-semibold text-foreground group-hover:text-creative-primary transition-colors">
+                      <h3 className="text-sm font-semibold text-foreground group-hover:text-creative-primary transition-colors">
                         {item.title}
                       </h3>
                       <Badge variant="secondary" className="bg-creative-primary/10 text-creative-primary border-creative-primary/20">
@@ -286,13 +286,13 @@ const Portfolio = () => {
                       </Badge>
                     </div>
                     
-                    <p className="text-muted-foreground mb-4">{item.description}</p>
+                    <p className="text-muted-foreground mb-4 text-sm">{item.description}</p>
                     
                     <div className="flex flex-wrap gap-2">
                       {item.tags.map((tag) => (
                         <span 
                           key={tag}
-                          className="px-3 py-1 text-sm bg-secondary text-secondary-foreground rounded-full"
+                          className="px-3 py-1 text-xs bg-secondary text-secondary-foreground rounded-full"
                         >
                           {tag}
                         </span>
@@ -308,8 +308,8 @@ const Portfolio = () => {
               <div className="mt-12 text-center">
                 <button
                   onClick={loadMoreItems}
-                  disabled={isLoading}
-                  className="px-8 py-3 border-[2px] border-accent bg-transparent text-accent rounded-full font-medium hover:bg-accent/90 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={isLoading} 
+                  className="px-6 py-3 text-md border-[2px] border-accent bg-transparent text-accent rounded-full font-medium hover:bg-accent/90 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isLoading ? 'Loading...' : 'Load More'}
                 </button>
@@ -431,14 +431,14 @@ const Portfolio = () => {
               {/* Item details */}
               <div className="mt-4 text-white">
                 <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-2xl font-bold">
+                  <h3 className="text-md font-bold">
                     {portfolioItems[currentItemIndex].title}
                   </h3>
-                  <Badge variant="secondary" className="bg-creative-primary/10 text-creative-primary border-creative-primary/20">
+                  <Badge variant="secondary" className="bg-creative-primary/10 text-creative-primary text-sm border-creative-primary/20">
                     {portfolioItems[currentItemIndex].category}
                   </Badge>
                 </div>
-                <p className="text-lg mb-4">{portfolioItems[currentItemIndex].description}</p>
+                <p className="text-sm mb-4">{portfolioItems[currentItemIndex].description}</p>
                 <div className="flex flex-wrap gap-2">
                   {portfolioItems[currentItemIndex].tags.map((tag) => (
                     <span 

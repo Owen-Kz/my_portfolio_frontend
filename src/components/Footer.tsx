@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail, Instagram, Heart, } from "lucide-react";
+import { Navigate } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -16,7 +17,9 @@ const Footer = () => {
     { name: "Home", href: "#" },
     { name: "Portfolio", href: "#portfolio" },
     { name: "About", href: "#about" },
-    { name: "Contact", href: "#contact" }
+    { name: "Contact", href: "#contact" },
+    { name: "Web Projects", href: "/webapps" }
+
   ];
 
   const scrollToSection = (href: string) => {
@@ -25,6 +28,8 @@ const Footer = () => {
     } else if (href.startsWith('#')) {
       const element = document.querySelector(href);
       element?.scrollIntoView({ behavior: 'smooth' });
+    }else{
+      window.location.href = href;
     }
   };
 
@@ -74,7 +79,7 @@ const Footer = () => {
                 <button
                   key={link.name}
                   onClick={() => scrollToSection(link.href)}
-                  className="block text-white/80 hover:text-creative-accent transition-colors duration-300"
+                  className="block text-white/80 hover:text-white/60transition-colors duration-300"
                 >
                   {link.name}
                 </button>
@@ -101,9 +106,7 @@ const Footer = () => {
             <div className="text-white/60 text-sm">
               © {currentYear} Dzidzom. All rights reserved.
             </div>
-            <div className="flex items-center gap-2 text-white/60 text-sm">
-              Made with <Heart className="w-4 h-4 text-creative-secondary" /> for amazing clients
-            </div>
+
           </div>
         </div>
       </div>

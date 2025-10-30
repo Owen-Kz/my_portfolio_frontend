@@ -4,12 +4,14 @@ import { Button } from '@/components/ui/button';
 import DashboardPortfolio from '@/components/dashboard/DashboardPortfolio';
 import { useApiClient } from "@/utils/apiClient";
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const DashboardHome = () => {
   const { get } = useApiClient();
   const [totalItems, setTotalItems] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTotalItems = async () => {
@@ -45,7 +47,7 @@ const DashboardHome = () => {
               <p className="text-red-500">{error}</p>
             ) : (
               <>
-                <p className="text-3xl font-bold">{totalItems}</p>
+                <p className="text-xl font-bold">{totalItems}</p>
                 <Button variant="link" className="p-0 mt-2">
                   View All
                 </Button>
@@ -59,7 +61,7 @@ const DashboardHome = () => {
             <CardTitle>Categories</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold">5</p>
+            <p className="text-xl font-bold">5</p>
           </CardContent>
         </Card>
         
@@ -68,8 +70,8 @@ const DashboardHome = () => {
             <CardTitle>Upload New</CardTitle>
           </CardHeader>
           <CardContent>
-            <Button asChild>
-              <a href="/dashboard/upload">Upload Item</a>
+            <Button  onClick={() => navigate('/dashboard/upload')}>
+             Upload Item
             </Button>
           </CardContent>
         </Card>

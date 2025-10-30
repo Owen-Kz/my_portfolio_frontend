@@ -82,8 +82,8 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Phone",
-      value: "+234(0)-8142-385-302",
-      href: "tel:+2348142385302"
+      value: "+234(0)-9027-315-223",
+      href: "tel:+2349027315223"
     },
     {
       icon: MapPin,
@@ -94,14 +94,14 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-background">
+    <section id="dev-contact" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
             Let's Work Together
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Have a project in mind? I'd love to hear about it. Let's create something amazing together.
           </p>
         </div>
@@ -116,15 +116,15 @@ const Contact = () => {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <CardContent className="p-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center">
-                      <info.icon className="w-6 h-6 text-white" />
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
+                      <info.icon className="w-4 h-4 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-foreground mb-1">{info.title}</h3>
+                      <h3 className="font-semibold text-foreground mb-1 text-sm">{info.title}</h3>
                       <a 
                         href={info.href}
-                        className="text-muted-foreground hover:text-creative-primary transition-colors"
+                        className="text-muted-foreground hover:text-creative-primary transition-colors text-sm"
                       >
                         {info.value}
                       </a>
@@ -157,7 +157,7 @@ const Contact = () => {
           <div className="lg:col-span-2">
             <Card className="border-0 shadow-soft bg-gradient-card backdrop-blur-sm animate-slide-up">
               <CardHeader>
-                <CardTitle className="text-2xl font-bold text-foreground">Send Me a Message</CardTitle>
+                <CardTitle className="text-lg font-bold text-foreground">Send Me a Message</CardTitle>
               </CardHeader>
               <CardContent>
                 <form   action="https://formspree.io/f/xnnnkknq"
