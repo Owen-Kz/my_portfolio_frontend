@@ -240,19 +240,19 @@ const WebNavigation = () => {
         switch(sectionId) {
             case 'home':
                 return (
-                    <div className="w-full h-full bg-gradient-to-br from-[#0d1117] to-[#161b22] rounded-lg p-3 relative overflow-hidden">
-                        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:16px_16px]"></div>
+                    <div className="w-full h-full bg-gradient-to-br from-[#0d1117] to-[#161b22] rounded-lg p-2 relative overflow-hidden">
+                        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:12px_12px]"></div>
                         <div className="relative z-10">
-                            <div className="flex items-center gap-2 mb-2">
-                                <div className="w-3 h-3 bg-[#4E9C7E] rounded-full"></div>
+                            <div className="flex items-center gap-1 mb-1">
+                                <div className="w-2 h-2 bg-[#4E9C7E] rounded-full"></div>
                                 <div className="text-white font-mono text-xs">~/home</div>
                             </div>
-                            <div className="space-y-1">
-                                <div className="h-1 bg-[#4E9C7E]/30 rounded"></div>
-                                <div className="h-1 bg-[#1f6feb]/30 rounded w-3/4"></div>
-                                <div className="h-1 bg-[#4E9C7E]/30 rounded w-1/2"></div>
+                            <div className="space-y-0.5">
+                                <div className="h-0.5 bg-[#4E9C7E]/30 rounded"></div>
+                                <div className="h-0.5 bg-[#1f6feb]/30 rounded w-3/4"></div>
+                                <div className="h-0.5 bg-[#4E9C7E]/30 rounded w-1/2"></div>
                             </div>
-                            <div className="mt-2 flex gap-1">
+                            <div className="mt-1 flex gap-0.5">
                                 {['TS', 'React', 'Node'].map((tech, i) => (
                                     <div key={tech} className="px-1 py-0.5 bg-[#21262d] text-[#7d8590] text-xs font-mono rounded border border-[#30363d]">
                                         {tech}
@@ -265,18 +265,18 @@ const WebNavigation = () => {
             
             case 'portfolio':
                 return (
-                    <div className="w-full h-full bg-[#161b22] rounded-lg p-3 relative overflow-hidden border border-[#30363d]">
-                        <div className="grid grid-cols-2 gap-1 mb-2">
+                    <div className="w-full h-full bg-[#161b22] rounded-lg p-2 relative overflow-hidden border border-[#30363d]">
+                        <div className="grid grid-cols-2 gap-0.5 mb-1">
                             {[1,2,3,4].map(i => (
                                 <div key={i} className="aspect-video bg-[#21262d] rounded border border-[#30363d] relative overflow-hidden">
                                     <div className="absolute inset-0 bg-gradient-to-br from-[#1f6feb]/20 to-[#4E9C7E]/10"></div>
-                                    {i === 1 && <div className="absolute bottom-1 left-1 right-1 h-1 bg-[#4E9C7E]/40 rounded"></div>}
-                                    {i === 2 && <div className="absolute top-1 left-1 w-2/3 h-0.5 bg-[#1f6feb]/40 rounded"></div>}
+                                    {i === 1 && <div className="absolute bottom-0.5 left-0.5 right-0.5 h-0.5 bg-[#4E9C7E]/40 rounded"></div>}
+                                    {i === 2 && <div className="absolute top-0.5 left-0.5 w-2/3 h-0.5 bg-[#1f6feb]/40 rounded"></div>}
                                 </div>
                             ))}
                         </div>
-                        <div className="flex items-center gap-2">
-                            <Folder className="w-3 h-3 text-[#1f6feb]" />
+                        <div className="flex items-center gap-1">
+                            <Folder className="w-2 h-2 text-[#1f6feb]" />
                             <div className="text-white font-mono text-xs">projects/</div>
                         </div>
                     </div>
@@ -284,29 +284,23 @@ const WebNavigation = () => {
             
             case 'about':
                 return (
-                    <div className="w-full h-full bg-[#161b22] rounded-lg p-3 relative overflow-hidden border border-[#30363d]">
-                        <div className="space-y-2">
-                            <div className="flex items-center gap-2">
-                                <div className="w-6 h-6 bg-gradient-to-r from-[#4E9C7E] to-[#1f6feb] rounded-full"></div>
+                    <div className="w-full h-full bg-[#161b22] rounded-lg p-2 relative overflow-hidden border border-[#30363d]">
+                        <div className="space-y-1">
+                            <div className="flex items-center gap-1">
+                                <div className="w-4 h-4 bg-gradient-to-r from-[#4E9C7E] to-[#1f6feb] rounded-full"></div>
                                 <div className="text-white font-mono text-xs">skills.md</div>
                             </div>
-                            <div className="space-y-1">
+                            <div className="space-y-0.5">
                                 <div className="flex justify-between">
                                     <span className="text-[#7d8590] text-xs">React</span>
-                                    <div className="w-12 h-1 bg-[#30363d] rounded-full overflow-hidden">
+                                    <div className="w-8 h-0.5 bg-[#30363d] rounded-full overflow-hidden">
                                         <div className="h-full bg-[#4E9C7E] rounded-full" style={{width: '90%'}}></div>
                                     </div>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-[#7d8590] text-xs">Node.js</span>
-                                    <div className="w-12 h-1 bg-[#30363d] rounded-full overflow-hidden">
+                                    <div className="w-8 h-0.5 bg-[#30363d] rounded-full overflow-hidden">
                                         <div className="h-full bg-[#1f6feb] rounded-full" style={{width: '85%'}}></div>
-                                    </div>
-                                </div>
-                                <div className="flex justify-between">
-                                    <span className="text-[#7d8590] text-xs">TypeScript</span>
-                                    <div className="w-12 h-1 bg-[#30363d] rounded-full overflow-hidden">
-                                        <div className="h-full bg-[#4E9C7E] rounded-full" style={{width: '88%'}}></div>
                                     </div>
                                 </div>
                             </div>
@@ -316,20 +310,20 @@ const WebNavigation = () => {
             
             case 'dev-contact':
                 return (
-                    <div className="w-full h-full bg-[#161b22] rounded-lg p-3 relative overflow-hidden border border-[#30363d]">
-                        <div className="space-y-2">
-                            <div className="flex items-center gap-2">
-                                <Mail className="w-4 h-4 text-[#4E9C7E]" />
+                    <div className="w-full h-full bg-[#161b22] rounded-lg p-2 relative overflow-hidden border border-[#30363d]">
+                        <div className="space-y-1">
+                            <div className="flex items-center gap-1">
+                                <Mail className="w-3 h-3 text-[#4E9C7E]" />
                                 <div className="text-white font-mono text-xs">contact.sh</div>
                             </div>
-                            <div className="space-y-1">
+                            <div className="space-y-0.5">
+                                <div className="h-3 bg-[#21262d] rounded border border-[#30363d]"></div>
+                                <div className="h-3 bg-[#21262d] rounded border border-[#30363d]"></div>
                                 <div className="h-4 bg-[#21262d] rounded border border-[#30363d]"></div>
-                                <div className="h-4 bg-[#21262d] rounded border border-[#30363d]"></div>
-                                <div className="h-8 bg-[#21262d] rounded border border-[#30363d]"></div>
                             </div>
-                            <div className="flex gap-1">
-                                <div className="flex-1 h-6 bg-[#4E9C7E] rounded border border-[#4E9C7E]"></div>
-                                <div className="w-6 h-6 bg-[#21262d] rounded border border-[#30363d]"></div>
+                            <div className="flex gap-0.5">
+                                <div className="flex-1 h-4 bg-[#4E9C7E] rounded border border-[#4E9C7E]"></div>
+                                <div className="w-4 h-4 bg-[#21262d] rounded border border-[#30363d]"></div>
                             </div>
                         </div>
                     </div>
@@ -337,8 +331,8 @@ const WebNavigation = () => {
             
             default:
                 return (
-                    <div className="w-full h-full bg-gradient-to-br from-[#161b22] to-[#21262d] rounded-lg p-3 flex items-center justify-center">
-                        <div className="text-[#7d8590] font-mono text-xs">Loading preview...</div>
+                    <div className="w-full h-full bg-gradient-to-br from-[#161b22] to-[#21262d] rounded-lg p-2 flex items-center justify-center">
+                        <div className="text-[#7d8590] font-mono text-xs">Loading...</div>
                     </div>
                 );
         }
@@ -431,14 +425,14 @@ const WebNavigation = () => {
 
             {/* Task View Overlay */}
             {isTaskView && (
-                <div className="fixed inset-0 bg-[#0d1117]/95 backdrop-blur-md z-40 flex items-center justify-center p-8 transition-all duration-500">
-                    <div className="max-w-6xl w-full">
-                        <div className="text-center mb-8">
-                            <h2 className="text-3xl font-bold text-white font-mono mb-2">Workspace Overview</h2>
-                            <p className="text-[#7d8590] font-mono">All sections minimized - Click to maximize</p>
+                <div className="fixed inset-0 bg-[#0d1117]/95 backdrop-blur-md z-40 flex items-center justify-center p-2 sm:p-4 md:p-8 transition-all duration-500 overflow-y-auto">
+                    <div className="max-w-6xl w-full py-4">
+                        <div className="text-center mb-4 sm:mb-6 md:mb-8">
+                            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white font-mono mb-1 sm:mb-2">Workspace Overview</h2>
+                            <p className="text-[#7d8590] font-mono text-xs sm:text-sm">All sections minimized - Click to maximize</p>
                         </div>
                         
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
                             {navItems.map((item) => {
                                 const Icon = item.icon;
                                 const isActive = activeItem === item.href;
@@ -448,26 +442,26 @@ const WebNavigation = () => {
                                         key={item.name}
                                         onClick={() => handleTaskViewCardClick(item.id)}
                                         className={`group cursor-pointer transition-all duration-300 hover:scale-105 ${
-                                            isActive ? 'ring-2 ring-[#4E9C7E]' : ''
+                                            isActive ? 'ring-1 sm:ring-2 ring-[#4E9C7E]' : ''
                                         }`}
                                     >
-                                        <div className={`bg-[#161b22] rounded-xl p-1 border-2 transition-all duration-300 ${
+                                        <div className={`bg-[#161b22] rounded-lg sm:rounded-xl p-1 sm:p-2 border transition-all duration-300 ${
                                             isActive 
-                                                ? 'border-[#4E9C7E] shadow-2xl shadow-[#4E9C7E]/20' 
-                                                : 'border-[#30363d] group-hover:border-[#4E9C7E] group-hover:shadow-lg'
+                                                ? 'border-[#4E9C7E] shadow-lg sm:shadow-2xl shadow-[#4E9C7E]/20' 
+                                                : 'border-[#30363d] group-hover:border-[#4E9C7E] group-hover:shadow-md sm:group-hover:shadow-lg'
                                         }`}>
                                             {/* Card Header */}
-                                            <div className="flex items-center gap-2 p-3 border-b border-[#30363d]">
-                                                <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${item.color} flex items-center justify-center`}>
-                                                    <Icon className="w-4 h-4 text-white" />
+                                            <div className="flex items-center gap-1 sm:gap-2 p-2 sm:p-3 border-b border-[#30363d]">
+                                                <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-md sm:rounded-lg bg-gradient-to-r ${item.color} flex items-center justify-center`}>
+                                                    <Icon className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                                                 </div>
-                                                <div>
-                                                    <h3 className={`font-bold font-mono ${
+                                                <div className="flex-1 min-w-0">
+                                                    <h3 className={`font-bold font-mono text-sm sm:text-base ${
                                                         isActive ? 'text-[#4E9C7E]' : 'text-white'
-                                                    }`}>
+                                                    } truncate`}>
                                                         {item.name}
                                                     </h3>
-                                                    <p className="text-[#7d8590] font-mono text-xs">
+                                                    <p className="text-[#7d8590] font-mono text-xs truncate">
                                                         {item.name === 'Home' && 'Introduction & Hero'}
                                                         {item.name === 'Portfolio' && 'Projects & Case Studies'}
                                                         {item.name === 'About' && 'Skills & Experience'}
@@ -478,17 +472,17 @@ const WebNavigation = () => {
                                             </div>
                                             
                                             {/* Section Preview */}
-                                            <div className="h-48 p-2">
+                                            <div className="h-20 sm:h-32 md:h-36 lg:h-40 p-1 sm:p-2">
                                                 {renderSectionPreview(item.id)}
                                             </div>
                                             
                                             {/* Card Footer */}
-                                            <div className="p-3 border-t border-[#30363d]">
+                                            <div className="p-2 sm:p-3 border-t border-[#30363d]">
                                                 <div className="flex justify-between items-center">
                                                     <span className="text-[#7d8590] font-mono text-xs">
                                                         Click to maximize
                                                     </span>
-                                                    <div className={`w-2 h-2 rounded-full ${
+                                                    <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${
                                                         isActive ? 'bg-[#4E9C7E]' : 'bg-[#30363d]'
                                                     }`}></div>
                                                 </div>
@@ -499,12 +493,12 @@ const WebNavigation = () => {
                             })}
                         </div>
                         
-                        <div className="text-center mt-8">
+                        <div className="text-center mt-4 sm:mt-6 md:mt-8">
                             <Button
                                 onClick={toggleTaskView}
-                                className="bg-[#30363d] hover:bg-[#3d444d] text-white font-mono border-0 px-8"
+                                className="bg-[#30363d] hover:bg-[#3d444d] text-white font-mono border-0 px-4 sm:px-6 md:px-8 text-xs sm:text-sm"
                             >
-                                <Minus className="w-4 h-4 mr-2" />
+                                <Minus className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                                 Close Workspace View
                             </Button>
                         </div>
@@ -535,7 +529,7 @@ const WebNavigation = () => {
                                             : 'text-[#7d8590] hover:bg-[#21262d] hover:text-white'
                                     }`}
                                 >
-                                    <Icon className="w-5 h-5 mb-1" />
+                                    <Icon className="w-4 h-4 sm:w-5 sm:h-5 mb-1" />
                                     <span className="text-xs font-mono">{item.name}</span>
                                 </Link>
                             );
@@ -550,7 +544,7 @@ const WebNavigation = () => {
                                     : 'text-[#7d8590] hover:bg-[#21262d] hover:text-white'
                             }`}
                         >
-                            <Menu className="w-5 h-5 mb-1" />
+                            <Menu className="w-4 h-4 sm:w-5 sm:h-5 mb-1" />
                             <span className="text-xs font-mono">More</span>
                         </button>
                     </div>
@@ -559,8 +553,8 @@ const WebNavigation = () => {
                 {/* Expanded Mobile Menu */}
                 {isMobileMenuOpen && (
                     <div className="absolute bottom-full left-0 right-0 mb-2 mx-2 bg-[#161b22] border border-[#30363d] rounded-lg shadow-2xl">
-                        <div className="p-3">
-                            <div className="grid grid-cols-2 gap-2 mb-3">
+                        <div className="p-2 sm:p-3">
+                            <div className="grid grid-cols-2 gap-1 sm:gap-2 mb-2 sm:mb-3">
                                 {navItems.slice(3).map((item) => {
                                     const Icon = item.icon;
                                     const isActive = activeItem === item.href;
@@ -570,32 +564,32 @@ const WebNavigation = () => {
                                             key={item.name}
                                             to={item.href}
                                             onClick={(e) => handleNavClick(item.href, item.id, e)}
-                                            className={`flex items-center gap-2 w-full text-left px-3 py-2 rounded transition-colors font-mono ${
+                                            className={`flex items-center gap-1 sm:gap-2 w-full text-left px-2 sm:px-3 py-1 sm:py-2 rounded transition-colors font-mono text-xs sm:text-sm ${
                                                 isActive
                                                     ? 'bg-[#4E9C7E] text-black'
                                                     : 'text-[#7d8590] hover:bg-[#21262d] hover:text-white'
                                             }`}
                                         >
-                                            <Icon className="w-4 h-4" />
+                                            <Icon className="w-3 h-3 sm:w-4 sm:h-4" />
                                             {item.name}
                                         </Link>
                                     );
                                 })}
                             </div>
                             
-                            <div className="space-y-2 border-t border-[#30363d] pt-3">
+                            <div className="space-y-1 sm:space-y-2 border-t border-[#30363d] pt-2 sm:pt-3">
                                 <Button
                                     onClick={toggleTaskView}
-                                    className="w-full bg-[#1f6feb] hover:bg-[#388bfd] text-white font-mono text-sm py-2"
+                                    className="w-full bg-[#1f6feb] hover:bg-[#388bfd] text-white font-mono text-xs sm:text-sm py-1.5 sm:py-2"
                                 >
-                                    <Grid className="w-4 h-4 mr-2" />
+                                    <Grid className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                                     Workspace View
                                 </Button>
                                 <Button
                                     onClick={handleContactClick}
-                                    className="w-full bg-[#4E9C7E] hover:bg-[#5FBB97] text-black font-mono text-sm py-2"
+                                    className="w-full bg-[#4E9C7E] hover:bg-[#5FBB97] text-black font-mono text-xs sm:text-sm py-1.5 sm:py-2"
                                 >
-                                    <Mail className="w-4 h-4 mr-2" />
+                                    <Mail className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                                     Get In Touch
                                 </Button>
                             </div>
@@ -608,21 +602,21 @@ const WebNavigation = () => {
             <div className={`lg:hidden fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
                 isScrolled ? 'bg-[#0d1117]/95 backdrop-blur-md border-b border-[#30363d]' : 'bg-transparent'
             }`}>
-                <div className="max-w-7xl mx-auto px-4 py-3">
+                <div className="max-w-7xl mx-auto px-3 sm:px-4 py-2 sm:py-3">
                     <div className="flex justify-between items-center">
                         <Link
                             to="/"
-                            className="flex items-center gap-2"
+                            className="flex items-center gap-1 sm:gap-2"
                             onClick={handleLogoClick}
                         >
-                            <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+                            <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center">
                                 <img 
                                     src="https://res.cloudinary.com/dll8awuig/image/upload/v1758277912/portfolio/id_u3fqer5lh/m951gqhls5tm8qg5bg8b.png" 
                                     alt="logo" 
-                                    className="w-5 h-5 rounded"
+                                    className="w-4 h-4 sm:w-5 sm:h-5 rounded"
                                 />
                             </div>
-                            <span className={`font-mono font-bold transition-colors duration-300 ${
+                            <span className={`font-mono font-bold text-sm sm:text-base transition-colors duration-300 ${
                                 isScrolled ? 'text-white' : 'text-white'
                             }`}>
                                 Dzidzom
@@ -630,13 +624,13 @@ const WebNavigation = () => {
                         </Link>
 
                         {/* Status indicator for mobile */}
-                        <div className="flex items-center gap-2">
-                            <div className="flex gap-1">
-                                <div className="w-2 h-2 bg-[#E95420] rounded-full"></div>
-                                <div className="w-2 h-2 bg-[#38B44A] rounded-full"></div>
-                                <div className="w-2 h-2 bg-[#EDD64D] rounded-full"></div>
+                        <div className="flex items-center gap-1 sm:gap-2">
+                            <div className="flex gap-0.5 sm:gap-1">
+                                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#E95420] rounded-full"></div>
+                                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#38B44A] rounded-full"></div>
+                                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#EDD64D] rounded-full"></div>
                             </div>
-                            <span className="text-[#7d8590] text-sm font-mono hidden sm:block">
+                            <span className="text-[#7d8590] text-xs font-mono hidden sm:block">
                                 {isTaskView ? 'workspace' : activeItem === '/' ? 'home' : activeItem.replace('/', '')}
                             </span>
                         </div>
