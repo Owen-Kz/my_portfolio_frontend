@@ -8,7 +8,7 @@ const WebHero = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [typingSpeed, setTypingSpeed] = useState(150);
 
-  const phrases = ['Full-Stack Developer', 'Problem Solver', 'Tech Innovator', 'Open Source Enthusiast'];
+  const phrases = ['Software Engineer', 'Problem Solver', 'Tech Innovator', 'Open Source Enthusiast'];
   const cursor = '▊';
 
   useEffect(() => {

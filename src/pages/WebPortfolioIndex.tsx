@@ -24,7 +24,7 @@ const WebPortfolioIndex = () => {
         };
       case '/dev-about':
         return {
-          title: 'About Dzidzom - Full-Stack Developer',
+          title: 'About Dzidzom - Software Engineer',
           description: 'Learn about my journey as a developer, my technical skills, and what drives me to build innovative solutions.',
           canonicalUrl: `${baseUrl}/dev-about`,
           keywords: 'about developer, technical skills, development experience, programming background'
@@ -38,10 +38,10 @@ const WebPortfolioIndex = () => {
         };
       default:
         return {
-          title: 'Dzidzom - Full-Stack Developer Portfolio',
-          description: 'Professional full-stack developer specializing in React, Node.js, and modern web technologies. View my portfolio and let\'s build something amazing together.',
+          title: 'Dzidzom - Software Engineer Portfolio',
+          description: 'Professional Software Engineer specializing in React, Node.js, and modern web technologies. View my portfolio and let\'s build something amazing together.',
           canonicalUrl: baseUrl,
-          keywords: 'full-stack developer, react developer, web development, portfolio, javascript, node.js'
+          keywords: 'Software Engineer, react developer, web development, portfolio, javascript, node.js'
         };
     }
   };

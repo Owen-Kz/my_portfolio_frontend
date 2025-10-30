@@ -43,7 +43,7 @@ const AboutWeb = () => {
             </h2>
             <div className="space-y-4 sm:space-y-6 text-sm sm:text-base md:text-lg text-[#7d8590] leading-relaxed font-mono">
               <p>
-                I'm a passionate full-stack developer with over 5 years of experience building 
+                I'm a passionate Software Engineer with over 5 years of experience building 
                 scalable web applications and digital solutions. My journey began with curiosity 
                 about how things work, which evolved into a love for creating with code.
               </p>
