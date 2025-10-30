@@ -151,12 +151,12 @@ const Navigation = () => {
       <nav className={`hidden md:block fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled ? 'bg-white/95 backdrop-blur-md shadow-soft' : 'bg-transparent'
       }`}>
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex justify-between items-center">
             {/* Logo */}
             <Link 
               to="/" 
-              className="text-2xl font-bold"
+              className="text-xl sm:text-2xl font-bold"
               onClick={handleLogoClick}
             >
               <span className={`transition-colors duration-300 ${
@@ -167,13 +167,13 @@ const Navigation = () => {
             </Link>
 
             {/* Desktop Menu */}
-            <div className="flex space-x-8">
+            <div className="flex space-x-4 sm:space-x-6 lg:space-x-8">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
                   onClick={(e) => handleNavClick(item.href, item.id, e)}
-                  className={`font-medium transition-colors duration-300 hover:text-accent ${
+                  className={`font-medium transition-colors duration-300 hover:text-accent text-sm sm:text-base ${
                     isScrolled ? 'text-foreground' : 'text-white'
                   } ${
                     location.pathname === item.href ? 'text-creative-primary font-semibold' : ''
@@ -187,7 +187,7 @@ const Navigation = () => {
             {/* Contact Button */}
             <Button 
               onClick={handleContactClick}
-              className={`transition-all duration-300 ${
+              className={`transition-all duration-300 text-xs sm:text-sm px-3 sm:px-4 py-2 h-9 sm:h-10 ${
                 isScrolled 
                   ? 'bg-creative-primary text-white hover:bg-creative-primary/90' 
                   : 'bg-white text-creative-primary hover:bg-white/90'
@@ -205,7 +205,7 @@ const Navigation = () => {
       } ${
         isScrolled ? 'bg-white/95 backdrop-blur-md border-t border-gray-200' : 'bg-white/95 backdrop-blur-md border-t border-gray-200'
       }`}>
-        <div className="max-w-7xl mx-auto px-4 py-3">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 py-2 sm:py-3">
           <div className="flex justify-between items-center">
             {navItems.slice(0, 3).map((item) => {
               const Icon = item.icon;
@@ -216,13 +216,13 @@ const Navigation = () => {
                   key={item.name}
                   to={item.href}
                   onClick={(e) => handleNavClick(item.href, item.id, e)}
-                  className={`flex flex-col items-center justify-center w-16 py-1 rounded-lg transition-all duration-200 ${
+                  className={`flex flex-col items-center justify-center w-14 sm:w-16 py-1 rounded-lg transition-all duration-200 ${
                     isActive
                       ? 'text-creative-primary scale-105'
                       : 'text-foreground hover:text-creative-primary'
                   }`}
                 >
-                  <Icon className="w-5 h-5 mb-1" />
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5 mb-0.5 sm:mb-1" />
                   <span className="text-xs font-medium">{item.name}</span>
                 </Link>
               );
@@ -231,13 +231,13 @@ const Navigation = () => {
             {/* More menu button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`flex flex-col items-center justify-center w-16 py-1 rounded-lg transition-all duration-200 ${
+              className={`flex flex-col items-center justify-center w-14 sm:w-16 py-1 rounded-lg transition-all duration-200 ${
                 isMobileMenuOpen
                   ? 'text-creative-primary scale-105'
                   : 'text-foreground hover:text-creative-primary'
               }`}
             >
-              <Menu className="w-5 h-5 mb-1" />
+              <Menu className="w-4 h-4 sm:w-5 sm:h-5 mb-0.5 sm:mb-1" />
               <span className="text-xs font-medium">More</span>
             </button>
           </div>
@@ -245,9 +245,9 @@ const Navigation = () => {
 
         {/* Expanded Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="absolute bottom-full left-0 right-0 mb-2 mx-4 bg-white rounded-lg shadow-soft border border-gray-200">
-            <div className="p-4">
-              <div className="grid grid-cols-2 gap-2 mb-4">
+          <div className="absolute bottom-full left-0 right-0 mb-2 mx-2 sm:mx-4 bg-white rounded-lg shadow-soft border border-gray-200">
+            <div className="p-3 sm:p-4">
+              <div className="grid grid-cols-2 gap-1 sm:gap-2 mb-3 sm:mb-4">
                 {navItems.slice(3).map((item) => {
                   const Icon = item.icon;
                   const isActive = location.pathname === item.href;
@@ -257,25 +257,25 @@ const Navigation = () => {
                       key={item.name}
                       to={item.href}
                       onClick={(e) => handleNavClick(item.href, item.id, e)}
-                      className={`flex items-center gap-2 w-full text-left px-3 py-2 rounded transition-colors ${
+                      className={`flex items-center gap-1 sm:gap-2 w-full text-left px-2 sm:px-3 py-1.5 sm:py-2 rounded transition-colors text-sm ${
                         isActive
                           ? 'text-creative-primary font-semibold bg-creative-primary/10'
                           : 'text-foreground hover:bg-gray-100'
                       }`}
                     >
-                      <Icon className="w-4 h-4" />
+                      <Icon className="w-3 h-3 sm:w-4 sm:h-4" />
                       {item.name}
                     </Link>
                   );
                 })}
               </div>
               
-              <div className="border-t border-gray-200 pt-4">
+              <div className="border-t border-gray-200 pt-3 sm:pt-4">
                 <Button
                   onClick={handleContactClick}
-                  className="w-full bg-creative-primary text-white hover:bg-creative-primary/90 font-medium"
+                  className="w-full bg-creative-primary text-white hover:bg-creative-primary/90 font-medium text-sm py-2 h-9 sm:h-10"
                 >
-                  <Mail className="w-4 h-4 mr-2" />
+                  <Mail className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                   Get In Touch
                 </Button>
               </div>
@@ -288,11 +288,11 @@ const Navigation = () => {
       <div className={`md:hidden fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled ? 'bg-white/95 backdrop-blur-md border-b border-gray-200' : 'bg-transparent'
       }`}>
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
           <div className="flex justify-between items-center">
             <Link 
               to="/" 
-              className="text-xl font-bold"
+              className="text-lg sm:text-xl font-bold"
               onClick={handleLogoClick}
             >
               <span className={`transition-colors duration-300 ${
@@ -304,7 +304,7 @@ const Navigation = () => {
 
             {/* Mobile status indicator */}
             <div className="flex items-center gap-2">
-              <span className={`text-sm font-medium transition-colors duration-300 ${
+              <span className={`text-xs sm:text-sm font-medium transition-colors duration-300 ${
                 isScrolled ? 'text-foreground' : 'text-white'
               }`}>
                 {location.pathname === '/' ? 'home' : location.pathname.replace('/', '')}
@@ -314,7 +314,8 @@ const Navigation = () => {
         </div>
       </div>
 
-   
+      {/* Bottom padding for mobile to prevent content from being hidden behind navbar */}
+      <div className="md:hidden pb-16 sm:pb-20"></div>
     </>
   );
 };
