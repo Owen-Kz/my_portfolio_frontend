@@ -54,7 +54,8 @@ const Navigation = () => {
           {/* Logo */}
           <Link to="/" className="group flex items-center gap-2">
             <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-500">
-                <div className="w-2 h-2 bg-black rounded-full" />
+                {/* <div className="w-2 h-2 bg-black rounded-full" /> */}
+                <img src="https://res.cloudinary.com/dll8awuig/image/upload/v1758277912/portfolio/id_u3fqer5lh/m951gqhls5tm8qg5bg8b.png" alt="logo" />
             </div>
             <span className="text-xl font-black tracking-tighter text-white uppercase">
               Dzidzom.
