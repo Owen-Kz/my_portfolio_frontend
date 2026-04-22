@@ -115,7 +115,7 @@ const DashboardPortfolio = () => {
             <div className="relative aspect-square overflow-hidden bg-black">
               <img 
                 src={item.images[currentImageIndices[item.id] || 0]} 
-                className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700"
+                className="w-full h-full object-cover  group-hover:opacity-100 transition-opacity duration-700"
                 alt=""
               />
               {item.images.length > 1 && (

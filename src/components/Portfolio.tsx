@@ -106,7 +106,7 @@ const Portfolio = () => {
                 <img 
                   src={item.images[currentImageIndices[item.id] || 0]} 
                   alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-80 group-hover:opacity-100"
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110  group-hover:opacity-100"
                 />
                 
                 {/* GLASS OVERLAY */}
