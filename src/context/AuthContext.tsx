@@ -1,3 +1,4 @@
+import LoadingScreen from '@/components/LoadingScreen';
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -112,7 +113,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   // Don't render children until auth state is initialized
   if (loading) {
-    return <div>Loading...</div>; // Or a proper loading spinner
+ return   <LoadingScreen />
   }
 
   return (
