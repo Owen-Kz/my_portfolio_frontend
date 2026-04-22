@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Button } from "../ui/button";
 
 const DashboardPortfolio = () => {
   const { get, post, put, del } = useApiClient();
