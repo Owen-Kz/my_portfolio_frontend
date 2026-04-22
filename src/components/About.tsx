@@ -1,122 +1,137 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { Palette, Lightbulb, Users, Award } from "lucide-react";
+import { motion } from "framer-motion";
+import { Palette, Lightbulb, Users, Award, ArrowUpRight } from "lucide-react";
 
 const About = () => {
   const skills = [
-    { name: "Adobe Creative Suite", level: 95 },
-    { name: "UI/UX Design", level: 90 },
-    { name: "Branding & Identity", level: 88 },
-    { name: "Web Design", level: 85 },
-    { name: "Print Design", level: 82 },
-    { name: "Illustration", level: 78 },
-    { name: "Logo Design", level: 90 },
-    { name: "Visual Hierarchy", level: 95 },
+    { name: "Creative Direction", level: "95%" },
+    { name: "UI/UX Architecture", level: "90%" },
+    { name: "Brand Identity", level: "88%" },
+    { name: "Motion Design", level: "82%" },
   ];
 
   const stats = [
-    { icon: Palette, number: "150+", label: "Projects Completed" },
-    { icon: Users, number: "50+", label: "Happy Clients" },
-    { icon: Award, number: "15+", label: "Awards Won" },
-    { icon: Lightbulb, number: "5+", label: "Years Experience" }
+    { icon: Palette, number: "150+", label: "Masterpieces" },
+    { icon: Users, number: "50+", label: "Global Clients" },
+    { icon: Award, number: "15+", label: "Industry Awards" },
+    { icon: Lightbulb, number: "05+", label: "Years of Craft" }
   ];
 
   return (
-    <section id="about" className="py-12 sm:py-16 lg:py-20 bg-secondary/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
-          {/* Left Column - About Text */}
-          <div>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 bg-gradient-primary bg-clip-text text-transparent">
-              About Me
-            </h2>
-            <div className="space-y-4 sm:space-y-6 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
+    <section id="about" className="relative py-32 bg-[#050505] text-white overflow-hidden">
+      {/* Background Decorative Text (Intimidating Element) */}
+      <div className="absolute top-0 right-0 text-[20vw] font-black text-white/[0.02] leading-none select-none pointer-events-none translate-x-1/4">
+        ABOUT
+      </div>
+
+      <div className="max-w-[1400px] mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+          
+          {/* LEFT SIDE: THE BOLD STATEMENT (Column 1-7) */}
+          <div className="lg:col-span-7 space-y-12">
+            <div>
+              <motion.span 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                className="text-xs font-black tracking-[0.5em] text-white/30 uppercase block mb-4"
+              >
+                01. The Mindset
+              </motion.span>
+              <h2 className="text-5xl md:text-8xl font-black tracking-tighter leading-[0.9] uppercase">
+                I don't just design. <br />
+                <span className="text-white/20">I build legacies.</span>
+              </h2>
+            </div>
+
+            <div className="space-y-8 text-xl md:text-2xl text-white/60 font-light leading-relaxed max-w-2xl">
               <p>
-                I'm a passionate graphic designer with over 5 years of experience creating 
-                visual solutions that communicate, inspire, and captivate audiences. My journey 
-                began with a love for art and technology, which naturally evolved into a career 
-                in design.
+                My approach is <span className="text-white font-medium italic">aggressive and intentional</span>. 
+                I strip away the noise to find the core essence of a brand, then amplify it 
+                with surgical precision.
               </p>
-              <p>
-                I specialize in brand identity, web design, and digital illustrations. My approach 
-                combines strategic thinking with creative execution, ensuring every project not 
-                only looks amazing but also serves its intended purpose effectively.
-              </p>
-              <p>
-                When I'm not designing, you can find me exploring new design trends, 
-                experimenting with emerging technologies, or sharing knowledge with the 
-                design community.
+              <p className="text-lg md:text-xl">
+                Based at the intersection of art and logic, I’ve spent over half a decade 
+                perfecting the craft of visual storytelling and user experience.
               </p>
             </div>
 
-            {/* Skills */}
-            <div className="mt-8 sm:mt-12">
-              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-6 text-foreground">Skills & Expertise</h3>
-              <div className="space-y-4 sm:space-y-6">
-                {skills.map((skill, index) => (
-                  <div key={skill.name}>
-                    <div className="flex justify-between mb-1 sm:mb-2">
-                      <span className="font-medium text-foreground text-sm sm:text-base">{skill.name}</span>
-                      <span className="text-creative-primary font-medium text-sm sm:text-base">{skill.level}%</span>
-                    </div>
-                    <Progress value={skill.level} className="h-1.5 sm:h-2" />
+            {/* MODERN SKILL BARS (Liquid Glass Style) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8">
+              {skills.map((skill) => (
+                <div key={skill.name} className="group">
+                  <div className="flex justify-between items-end mb-3">
+                    <span className="text-xs font-black uppercase tracking-widest text-white/40 group-hover:text-white transition-colors">
+                      {skill.name}
+                    </span>
+                    <span className="text-sm font-bold italic">{skill.level}</span>
                   </div>
-                ))}
-              </div>
+                  <div className="h-[2px] w-full bg-white/10 overflow-hidden rounded-full">
+                    <motion.div 
+                      initial={{ width: 0 }}
+                      whileInView={{ width: skill.level }}
+                      transition={{ duration: 1.5, ease: "circOut" }}
+                      className="h-full bg-white group-hover:bg-blue-500 transition-colors shadow-[0_0_15px_rgba(255,255,255,0.5)]"
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Right Column - Stats & Info */}
-          <div>
-            {/* Stats Grid */}
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 mb-8 sm:mb-12">
+          {/* RIGHT SIDE: THE STATS & PHILOSOPHY (Column 8-12) */}
+          <div className="lg:col-span-5 space-y-8">
+            
+            {/* STATS PODS (Liquid Glass Cards) */}
+            <div className="grid grid-cols-2 gap-4">
               {stats.map((stat, index) => (
-                <Card 
-                  key={stat.label}
-                  className="text-center p-3 sm:p-4 md:p-6 border-0 shadow-soft hover:shadow-card-hover transition-all duration-300 bg-gradient-card backdrop-blur-sm"
+                <div 
+                  key={index}
+                  className="p-8 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl hover:bg-white/10 transition-all duration-500 group"
                 >
-                  <CardContent className="p-0">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 md:mb-4">
-                      <stat.icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-8 md:h-8 text-white" />
-                    </div>
-                    <div className="text-xl sm:text-2xl md:text-3xl font-bold text-creative-primary mb-1 sm:mb-2">{stat.number}</div>
-                    <div className="text-muted-foreground text-xs sm:text-sm">{stat.label}</div>
-                  </CardContent>
-                </Card>
+                  <stat.icon className="w-5 h-5 text-white/20 group-hover:text-white mb-6 transition-colors" />
+                  <div className="text-4xl font-black tracking-tighter mb-1">{stat.number}</div>
+                  <div className="text-[10px] font-black uppercase tracking-widest text-white/40">{stat.label}</div>
+                </div>
               ))}
             </div>
 
-            {/* Values */}
-            <Card className="border-0 shadow-soft bg-gradient-card backdrop-blur-sm">
-              <CardContent className="p-4 sm:p-6 md:p-8">
-                <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-4 sm:mb-6 text-foreground">My Design Philosophy</h3>
-                <div className="space-y-3 sm:space-y-4">
-                  <div className="flex items-start gap-3 sm:gap-4">
-                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-creative-primary rounded-full mt-1.5 sm:mt-2 flex-shrink-0"></div>
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-1 text-sm sm:text-base">Purpose-Driven Design</h4>
-                      <p className="text-muted-foreground text-xs sm:text-sm">Every design decision serves a strategic purpose and user need.</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3 sm:gap-4">
-                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-creative-secondary rounded-full mt-1.5 sm:mt-2 flex-shrink-0"></div>
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-1 text-sm sm:text-base">Continuous Innovation</h4>
-                      <p className="text-muted-foreground text-xs sm:text-sm">Staying ahead of trends while maintaining timeless appeal.</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3 sm:gap-4">
-                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-creative-accent rounded-full mt-1.5 sm:mt-2 flex-shrink-0"></div>
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-1 text-sm sm:text-base">Collaborative Approach</h4>
-                      <p className="text-muted-foreground text-xs sm:text-sm">Working closely with clients to bring their vision to life.</p>
-                    </div>
-                  </div>
+            {/* PHILOSOPHY CARD (Large Curved Card) */}
+            <div className="relative p-10 rounded-[3rem] bg-gradient-to-br from-white/10 to-transparent border border-white/10 overflow-hidden">
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-3xl" />
+                
+                <h3 className="text-xl font-black uppercase tracking-widest mb-8 border-b border-white/10 pb-4">
+                    The Philosophy
+                </h3>
+                
+                <div className="space-y-8">
+                    {[
+                        { t: "Radical Simplicity", d: "If it doesn't add value, it's a distraction." },
+                        { t: "Timeless Impact", d: "Designed today to look relevant in a decade." },
+                        { t: "Fearless Logic", d: "Every pixel is placed with strategic intent." }
+                    ].map((item, i) => (
+                        <div key={i} className="flex gap-4 group">
+                            <span className="text-xs font-black text-white/20 mt-1">0{i+1}</span>
+                            <div>
+                                <h4 className="font-bold uppercase text-sm group-hover:text-blue-400 transition-colors">{item.t}</h4>
+                                <p className="text-sm text-white/50">{item.d}</p>
+                            </div>
+                        </div>
+                    ))}
                 </div>
-              </CardContent>
-            </Card>
+
+                <button className="mt-10 flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] hover:gap-4 transition-all">
+                    Download Portfolio <ArrowUpRight className="w-4 h-4" />
+                </button>
+            </div>
           </div>
+
         </div>
+      </div>
+
+      {/* SECTION BOTTOM CURVE (The "Scoop") */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] rotate-180">
+        <svg className="relative block w-full h-[80px]" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5,73.84-4.36,147.54,16.88,218.2,35.26,69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-32.82,80.5-34.83,172.34-48.8,203.1,4.42V120H0Z" fill="#111111"></path>
+        </svg>
       </div>
     </section>
   );

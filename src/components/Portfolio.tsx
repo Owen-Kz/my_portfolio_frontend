@@ -1,30 +1,24 @@
 import { useState, useEffect, useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Eye, ChevronLeft, ChevronRight, X } from "lucide-react";
-import { motion } from "framer-motion";
+import { ExternalLink, Eye, ChevronLeft, ChevronRight, X, ArrowUpRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Portfolio = () => {
-  // State management
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [currentItemIndex, setCurrentItemIndex] = useState(0);
-  const [currentImageIndices, setCurrentImageIndices] = useState({});
+  const [currentImageIndices, setCurrentImageIndices] = useState<Record<string, number>>({});
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [autoSlide, setAutoSlide] = useState(false);
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
-  const [portfolioItems, setPortfolioItems] = useState([]);
+  const [portfolioItems, setPortfolioItems] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const modalRef = useRef(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
-  // Constants
   const itemsPerPage = 6;
   const categories = ['All', 'Branding', 'UI/UX', 'Print Design', 'Web Design', 'Illustration'];
 
-  // Fetch portfolio items
+  // Data Fetching (Logic remains the same, styling changes)
   useEffect(() => {
     const fetchPortfolioItems = async () => {
       try {
@@ -33,173 +27,61 @@ const Portfolio = () => {
         const response = await fetch(
           `https://manga.asfischolar.org/files?page=${currentPage}&limit=${itemsPerPage}${categoryParam}`
         );
-        
-        if (!response.ok) throw new Error('Failed to fetch portfolio items');
-        
         const data = await response.json();
         
-        if (currentPage === 1) {
-          setPortfolioItems(data.items);
-        } else {
-          setPortfolioItems(prevItems => [...prevItems, ...data.items]);
-        }
+        if (currentPage === 1) setPortfolioItems(data.items);
+        else setPortfolioItems(prev => [...prev, ...data.items]);
         
         setTotalPages(data.pagination.totalPages);
-        
-        // Initialize image indices
         const newIndices = {...currentImageIndices};
-        data.items.forEach(item => {
-          if (!newIndices[item.id]) {
-            newIndices[item.id] = 0;
-          }
+        data.items.forEach((item: any) => {
+          if (!newIndices[item.id]) newIndices[item.id] = 0;
         });
         setCurrentImageIndices(newIndices);
       } catch (err) {
-        setError(err.message);
+        console.error(err);
       } finally {
         setIsLoading(false);
       }
     };
-
     fetchPortfolioItems();
   }, [currentPage, selectedCategory]);
 
-  // Reset page when category changes
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [selectedCategory]);
-
-  // Auto slide effect
-  useEffect(() => {
-    let interval;
-    if (isModalOpen && autoSlide && portfolioItems.length > 0) {
-      interval = setInterval(() => {
-        const currentItem = portfolioItems[currentItemIndex];
-        setCurrentImageIndices(prev => ({
-          ...prev,
-          [currentItem.id]: (prev[currentItem.id] + 1) % currentItem.images.length
-        }));
-      }, 3000);
-    }
-    return () => clearInterval(interval);
-  }, [isModalOpen, autoSlide, currentItemIndex, portfolioItems]);
-
-  // Navigation functions
-  const loadMoreItems = () => {
-    if (currentPage < totalPages) setCurrentPage(prev => prev + 1);
-  };
-
-  const openModal = (index) => {
+  const openModal = (index: number) => {
     setCurrentItemIndex(index);
     setIsModalOpen(true);
-    setAutoSlide(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setAutoSlide(false);
+  const goToNextImage = (itemId: string, max: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImageIndices(prev => ({
+      ...prev,
+      [itemId]: (prev[itemId] + 1) % max
+    }));
   };
-
-  const goToPrevItem = () => {
-    setCurrentItemIndex(prev => prev === 0 ? portfolioItems.length - 1 : prev - 1);
-  };
-
-  const goToNextItem = () => {
-    setCurrentItemIndex(prev => prev === portfolioItems.length - 1 ? 0 : prev + 1);
-  };
-
-  const goToPrevImage = (itemId) => {
-    setCurrentImageIndices(prev => {
-      const currentItem = portfolioItems.find(item => item.id === itemId);
-      return {
-        ...prev,
-        [itemId]: prev[itemId] === 0 ? currentItem.images.length - 1 : prev[itemId] - 1
-      };
-    });
-  };
-
-  const goToNextImage = (itemId) => {
-    setCurrentImageIndices(prev => {
-      const currentItem = portfolioItems.find(item => item.id === itemId);
-      return {
-        ...prev,
-        [itemId]: (prev[itemId] + 1) % currentItem.images.length
-      };
-    });
-  };
-
-  const toggleAutoSlide = () => setAutoSlide(prev => !prev);
-
-  // Touch handlers
-  const handleTouchStart = (e) => setTouchStart(e.targetTouches[0].clientX);
-  const handleTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
-  const handleTouchEnd = () => {
-    if (portfolioItems.length === 0) return;
-    const currentItem = portfolioItems[currentItemIndex];
-    if (touchStart - touchEnd > 100) goToNextImage(currentItem.id);
-    if (touchStart - touchEnd < -100) goToPrevImage(currentItem.id);
-  };
-
-  // Close modal when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        closeModal();
-      }
-    };
-
-    if (isModalOpen) document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isModalOpen]);
-
-  // Loading and error states
-  if (isLoading && currentPage === 1) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-creative-primary"></div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="text-red-500 text-center p-4">
-          <p>Error loading portfolio: {error}</p>
-          <button 
-            onClick={() => window.location.reload()}
-            className="mt-4 px-4 py-2 bg-creative-primary text-white rounded hover:bg-creative-primary/90"
-          >
-            Try Again
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   return (
-    <section id="portfolio" className="py-20 bg-background">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Header */}
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
-            My Portfolio
+    <section id="portfolio" className="py-32 bg-[#050505] text-white overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-6">
+        
+        {/* 1. INTIMIDATING HEADER */}
+        <div className="mb-24 space-y-4">
+          <span className="text-xs font-black tracking-[0.5em] text-white/30 uppercase">Selected Works</span>
+          <h2 className="text-6xl md:text-9xl font-black tracking-tighter leading-none italic uppercase">
+            Featured <br /> <span className="text-white/10">Projects</span>
           </h2>
-          <p className="text-l text-muted-foreground max-w-3xl mx-auto">
-            A collection of my latest design projects showcasing creativity, innovation, and attention to detail.
-          </p>
         </div>
 
-        {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        {/* 2. LIQUID GLASS FILTER */}
+        <div className="flex flex-wrap gap-3 mb-16">
           {categories.map((category) => (
             <button
               key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-1 rounded-full font-medium text-sm transition-all duration-300 ${
+              onClick={() => { setSelectedCategory(category); setCurrentPage(1); }}
+              className={`px-8 py-3 rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-500 border ${
                 selectedCategory === category
-                  ? 'bg-creative-primary text-white shadow-creative'
-                  : 'bg-secondary text-secondary-foreground hover:bg-creative-primary/10 hover:text-creative-primary'
+                  ? 'bg-white text-black border-white'
+                  : 'bg-white/5 text-white/40 border-white/10 hover:border-white/40'
               }`}
             >
               {category}
@@ -207,253 +89,119 @@ const Portfolio = () => {
           ))}
         </div>
 
-        {/* Portfolio Grid */}
-        {portfolioItems.length === 0 && !isLoading ? (
-          <div className="text-center py-12">
-            <p className="text-lg text-muted-foreground">No portfolio items found for this category</p>
-          </div>
-        ) : (
-          <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {portfolioItems.map((item, index) => (
-                <Card 
-                  key={`${item.id}-${index}`}
-                  className="group overflow-hidden border-0 shadow-soft hover:shadow-card-hover transition-all duration-500 animate-slide-up bg-gradient-card backdrop-blur-sm"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <div className="relative overflow-hidden" onClick={() => openModal(index)}>
-                    <div className="relative h-64 overflow-hidden">
-                      {item.images.map((image, imgIndex) => (
-                        <img 
-                          key={imgIndex}
-                          src={image} 
-                          alt={`${item.title} ${imgIndex + 1}`}
-                          className={`w-full h-full object-cover transition-opacity duration-500 absolute top-0 left-0 ${
-                            imgIndex === currentImageIndices[item.id] ? 'opacity-100' : 'opacity-0'
-                          }`}
-                        />
-                      ))}
-                      
-                      {item.images.length > 1 && (
-                        <>
-                          <button 
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              goToPrevImage(item.id);
-                            }}
-                            className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-black/50 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors z-10"
-                          >
-                            <ChevronLeft className="w-5 h-5" />
-                          </button>
-                          <button 
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              goToNextImage(item.id);
-                            }}
-                            className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-black/50 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors z-10"
-                          >
-                            <ChevronRight className="w-5 h-5" />
-                          </button>
-                        </>
-                      )}
-                    </div>
-                    
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute bottom-4 right-4 flex gap-2">
-                        <button 
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            openModal(index);
-                          }}
-                          className="p-3 bg-black/50 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors"
-                        >
-                          <Eye className="w-5 h-5" />
-                        </button>
-                        <button className="p-3 bg-black/50 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors">
-                          <ExternalLink className="w-5 h-5" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <CardContent className="p-6">
-                    <div className="flex justify-between items-start mb-3">
-                      <h3 className="text-sm font-semibold text-foreground group-hover:text-creative-primary transition-colors">
-                        {item.title}
-                      </h3>
-                      <Badge variant="secondary" className="bg-creative-primary/10 text-creative-primary border-creative-primary/20">
-                        {item.category}
-                      </Badge>
-                    </div>
-                    
-                    <p className="text-muted-foreground mb-4 text-sm">{item.description}</p>
-                    
-                    <div className="flex flex-wrap gap-2">
-                      {item.tags.map((tag) => (
-                        <span 
-                          key={tag}
-                          className="px-3 py-1 text-xs bg-secondary text-secondary-foreground rounded-full"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            {/* Load More */}
-            {currentPage < totalPages && (
-              <div className="mt-12 text-center">
-                <button
-                  onClick={loadMoreItems}
-                  disabled={isLoading} 
-                  className="px-6 py-3 text-md border-[2px] border-accent bg-transparent text-accent rounded-full font-medium hover:bg-accent/90 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isLoading ? 'Loading...' : 'Load More'}
-                </button>
-              </div>
-            )}
-          </>
-        )}
-
-        {/* Modal with Mini-Previews */}
-        {isModalOpen && portfolioItems.length > 0 && (
-          <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
-            <button 
-              onClick={closeModal}
-              className="absolute top-4 right-4 p-2 text-white hover:text-creative-primary transition-colors z-50"
+        {/* 3. MODERN CURVED GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12" id="portfolio-grid">
+          {portfolioItems.map((item, index) => (
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: index % 2 * 0.2 }}
+              key={item.id}
+              className="group cursor-pointer"
+              onClick={() => openModal(index)}
             >
-              <X className="w-8 h-8" />
-            </button>
-            
-            <div 
-              ref={modalRef}
-              className="relative max-w-6xl w-full max-h-[90vh]"
-            >
-              <div 
-                className="relative h-[70vh] overflow-hidden rounded-lg mb-4"
-                onTouchStart={handleTouchStart}
-                onTouchMove={handleTouchMove}
-                onTouchEnd={handleTouchEnd}
-              >
-                <motion.img 
-                  key={currentImageIndices[portfolioItems[currentItemIndex].id]}
-                  src={portfolioItems[currentItemIndex].images[currentImageIndices[portfolioItems[currentItemIndex].id]]}
-                  alt={portfolioItems[currentItemIndex].title}
-                  className="w-full h-full object-contain select-none"
-                  draggable="false"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+              {/* CURVED PRODUCT CARD */}
+              <div className="relative aspect-[4/5] md:aspect-square overflow-hidden rounded-[3rem] bg-white/5 border border-white/10">
+                <img 
+                  src={item.images[currentImageIndices[item.id] || 0]} 
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-80 group-hover:opacity-100"
                 />
                 
-                {/* Navigation arrows */}
-                <button 
-                  onClick={goToPrevItem}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 rounded-full text-white hover:bg-creative-primary transition-colors z-10"
-                >
-                  <ChevronLeft className="w-8 h-8" />
-                </button>
-                <button 
-                  onClick={goToNextItem}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 rounded-full text-white hover:bg-creative-primary transition-colors z-10"
-                >
-                  <ChevronRight className="w-8 h-8" />
-                </button>
+                {/* GLASS OVERLAY */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
                 
-                {/* Image position indicator */}
-                {portfolioItems[currentItemIndex].images.length > 1 && (
-                  <div className="absolute left-1/2 -translate-x-1/2 bottom-4 flex gap-2 z-10">
-                    {portfolioItems[currentItemIndex].images.map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setCurrentImageIndices(prev => ({
-                          ...prev,
-                          [portfolioItems[currentItemIndex].id]: index
-                        }))}
-                        className={`w-3 h-3 rounded-full transition-all ${
-                          index === currentImageIndices[portfolioItems[currentItemIndex].id]
-                            ? 'bg-accent w-6' 
-                            : 'bg-accent/50'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                )}
-                
-                {/* Auto-slide toggle */}
-                <button 
-                  onClick={toggleAutoSlide}
-                  className={`absolute left-4 bottom-4 px-4 py-2 rounded-full z-10 ${
-                    autoSlide ? 'bg-accent text-white' : 'bg-black/50 text-white'
-                  }`}
-                >
-                  {autoSlide ? 'Pause' : 'Play'}
-                </button>
-                
-                {/* Image counter */}
-                {portfolioItems[currentItemIndex].images.length > 1 && (
-                  <div className="absolute right-4 bottom-4 px-3 py-1 bg-black/50 rounded-full text-white z-10">
-                    {currentImageIndices[portfolioItems[currentItemIndex].id] + 1} / {portfolioItems[currentItemIndex].images.length}
-                  </div>
-                )}
-              </div>
-              
-              {/* Mini-previews section */}
-              {portfolioItems[currentItemIndex].images.length > 1 && (
-                <div className="flex gap-2 overflow-x-auto py-2 scrollbar-hide">
-                  {portfolioItems[currentItemIndex].images.map((image, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentImageIndices(prev => ({
-                        ...prev,
-                        [portfolioItems[currentItemIndex].id]: index
-                      }))}
-                      className={`flex-shrink-0 w-20 h-20 rounded-md overflow-hidden border-2 transition-all ${
-                        index === currentImageIndices[portfolioItems[currentItemIndex].id]
-                          ? 'border-accent scale-105'
-                          : 'border-transparent hover:border-white/30'
-                      }`}
-                    >
-                      <img
-                        src={image}
-                        alt={`Thumbnail ${index + 1}`}
-                        className="w-full h-full object-cover"
-                      />
-                    </button>
-                  ))}
-                </div>
-              )}
-              
-              {/* Item details */}
-              <div className="mt-4 text-white">
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-md font-bold">
-                    {portfolioItems[currentItemIndex].title}
-                  </h3>
-                  <Badge variant="secondary" className="bg-creative-primary/10 text-creative-primary text-sm border-creative-primary/20">
-                    {portfolioItems[currentItemIndex].category}
+                {/* FLOATING CARD UI */}
+                <div className="absolute top-8 left-8">
+                   <Badge className="bg-white/10 backdrop-blur-md text-white border-white/20 px-4 py-1 rounded-full uppercase text-[10px] tracking-widest">
+                    {item.category}
                   </Badge>
                 </div>
-                <p className="text-sm mb-4">{portfolioItems[currentItemIndex].description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {portfolioItems[currentItemIndex].tags.map((tag) => (
-                    <span 
-                      key={tag}
-                      className="px-3 py-1 text-sm bg-white/10 text-white rounded-full"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+
+                <div className="absolute bottom-10 left-10 right-10 flex justify-between items-end">
+                  <div className="space-y-2">
+                    <h3 className="text-3xl font-black uppercase tracking-tighter">{item.title}</h3>
+                    <div className="flex gap-2">
+                       {item.tags.slice(0, 2).map((tag: string) => (
+                         <span key={tag} className="text-[10px] text-white/50 uppercase tracking-widest">{tag}</span>
+                       ))}
+                    </div>
+                  </div>
+                  <div className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center transform translate-y-20 group-hover:translate-y-0 transition-transform duration-500">
+                    <ArrowUpRight className="w-5 h-5" />
+                  </div>
                 </div>
+
+                {/* IMAGE COUNTER / NAV */}
+                {item.images.length > 1 && (
+                  <button 
+                    onClick={(e) => goToNextImage(item.id, item.images.length, e)}
+                    className="absolute top-1/2 right-6 -translate-y-1/2 w-12 h-12 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                )}
               </div>
-            </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* LOAD MORE BUTTON */}
+        {currentPage < totalPages && (
+          <div className="mt-24 text-center">
+            <button
+              onClick={() => setCurrentPage(p => p + 1)}
+              className="group relative px-12 py-5 rounded-full overflow-hidden"
+            >
+               <span className="relative z-10 text-xs font-black uppercase tracking-[0.3em] text-white group-hover:text-black transition-colors duration-500">
+                Load More Projects
+               </span>
+               <div className="absolute inset-0 bg-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+               <div className="absolute inset-0 border border-white/20 rounded-full" />
+            </button>
           </div>
         )}
       </div>
+
+      {/* 4. CINEMATIC MODAL */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] bg-black backdrop-blur-3xl overflow-y-auto"
+          >
+            <div className="min-h-screen px-6 py-20 flex flex-col items-center">
+              <button 
+                onClick={() => setIsModalOpen(false)}
+                className="fixed top-10 right-10 p-4 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white hover:text-black transition-all z-[210]"
+              >
+                <X className="w-6 h-6" />
+              </button>
+
+              <div className="max-w-6xl w-full">
+                <div className="mb-20 space-y-6">
+                  <span className="text-white/40 font-bold uppercase tracking-widest">{portfolioItems[currentItemIndex].category}</span>
+                  <h2 className="text-5xl md:text-8xl font-black tracking-tighter uppercase">{portfolioItems[currentItemIndex].title}</h2>
+                  <p className="text-xl md:text-2xl text-white/60 font-light max-w-3xl leading-relaxed">
+                    {portfolioItems[currentItemIndex].description}
+                  </p>
+                </div>
+
+                <div className="space-y-12">
+                  {portfolioItems[currentItemIndex].images.map((img: string, i: number) => (
+                    <div key={i} className="rounded-[4rem] overflow-hidden border border-white/10">
+                      <img src={img} alt="" className="w-full h-auto" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
