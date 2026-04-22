@@ -44,7 +44,7 @@ const DashboardLayout = () => {
   ];
 
   return (
-    <div className="flex h-screen bg-[#050505] text-white overflow-hidden font-sans">
+    <div className="flex h-screen bg-[#050505]/90  text-white overflow-hidden font-sans">
       
       {/* 1. DESKTOP ARCHITECTURAL SIDEBAR */}
       <aside className="hidden md:flex flex-col w-72 bg-[#0A0A0A] border-r border-white/5 relative z-20">
@@ -112,7 +112,7 @@ const DashboardLayout = () => {
       </aside>
 
       {/* 2. MAIN CONTENT AREA */}
-      <main className="flex-1 relative flex flex-col min-w-0 bg-[#050505]">
+      <main className="flex-1 relative flex flex-col min-w-0 bg-[#050505]/90 ">
         {/* Subtle background glow */}
         <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
         

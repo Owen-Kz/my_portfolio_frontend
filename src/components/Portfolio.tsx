@@ -61,7 +61,7 @@ const Portfolio = () => {
   };
 
   return (
-    <section id="portfolio" className="py-32 bg-[#050505] text-white overflow-hidden">
+    <section id="portfolio" className="py-32 bg-[#050505]/90  text-white overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6">
         
         {/* 1. INTIMIDATING HEADER */}

@@ -39,7 +39,7 @@ const Hero = () => {
   }, [displayText, currentPhraseIndex, isDeleting, typingSpeed]);
 
   return (
-    <div className="relative min-h-screen w-full bg-[#050505] text-white selection:bg-white selection:text-black overflow-hidden">
+    <div className="relative min-h-screen w-full bg-[#050505]/90 text-white selection:bg-white selection:text-black overflow-hidden">
       
       {/* 1. LIQUID GLASS NAVBAR */}
       {/* <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-4xl">
@@ -58,10 +58,10 @@ const Hero = () => {
       </nav> */}
 
       {/* 2. BACKGROUND ELEMENTS (Abstract Curves) */}
-      <div className="absolute inset-0 z-0">
+      {/* <div className="absolute inset-0 z-0">
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-600/20 rounded-full blur-[120px] animate-pulse"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-purple-600/10 rounded-full blur-[120px]"></div>
-      </div>
+      </div> */}
 
       {/* 3. MAIN CONTENT */}
       <section className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 pt-20">

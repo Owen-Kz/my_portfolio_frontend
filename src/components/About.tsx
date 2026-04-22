@@ -17,7 +17,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="relative py-32 bg-[#050505] text-white overflow-hidden">
+    <section id="about" className="relative py-32 bg-[#050505]/90  text-white overflow-hidden">
       {/* Background Decorative Text (Intimidating Element) */}
       <div className="absolute top-0 right-0 text-[20vw] font-black text-white/[0.02] leading-none select-none pointer-events-none translate-x-1/4">
         ABOUT
@@ -128,11 +128,11 @@ const About = () => {
       </div>
 
       {/* SECTION BOTTOM CURVE (The "Scoop") */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] rotate-180">
+      {/* <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] rotate-180">
         <svg className="relative block w-full h-[80px]" viewBox="0 0 1200 120" preserveAspectRatio="none">
             <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5,73.84-4.36,147.54,16.88,218.2,35.26,69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-32.82,80.5-34.83,172.34-48.8,203.1,4.42V120H0Z" fill="#111111"></path>
         </svg>
-      </div>
+      </div> */}
     </section>
   );
 };

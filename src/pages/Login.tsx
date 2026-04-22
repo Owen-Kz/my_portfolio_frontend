@@ -31,7 +31,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white relative overflow-hidden flex items-center justify-center">
+    <div className="min-h-screen bg-[#050505]/90  text-white relative overflow-hidden flex items-center justify-center">
       
       {/* 1. BACKGROUND ATMOSPHERE */}
       <div className="absolute inset-0 z-0">

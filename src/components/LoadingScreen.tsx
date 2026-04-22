@@ -21,7 +21,7 @@ const LoadingScreen = () => {
     <motion.div
       initial={{ opacity: 1 }}
       exit={{ y: "-100%", transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } }}
-      className="fixed inset-0 z-[500] bg-[#050505] flex flex-col items-center justify-center text-white"
+      className="fixed inset-0 z-[500] bg-[#050505]/90  flex flex-col items-center justify-center text-white"
     >
       <div className="relative">
         {/* Background Watermark */}

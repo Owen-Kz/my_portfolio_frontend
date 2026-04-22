@@ -14,7 +14,7 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="relative min-h-screen w-full bg-[#050505] text-white flex items-center justify-center overflow-hidden selection:bg-white selection:text-black">
+    <div className="relative min-h-screen w-full bg-[#050505]/90  text-white flex items-center justify-center overflow-hidden selection:bg-white selection:text-black">
       
       {/* 1. BACKGROUND AURAS (Atmospheric depth) */}
       <div className="absolute inset-0 z-0">

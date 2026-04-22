@@ -101,7 +101,7 @@ const UploadDevPortfolio = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white py-20 px-6">
+    <div className="min-h-screen bg-[#050505]/90  text-white py-20 px-6">
       <div className="max-w-5xl mx-auto">
         
         {/* 1. EDITORIAL HEADER */}

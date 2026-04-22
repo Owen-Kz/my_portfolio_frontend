@@ -49,7 +49,7 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-32 bg-[#050505] text-white overflow-hidden relative">
+    <section id="contact" className="py-32 bg-[#050505]/90  text-white overflow-hidden relative">
       {/* Decorative Background Text */}
       <div className="absolute bottom-10 left-10 text-[15vw] font-black text-white/[0.02] leading-none select-none pointer-events-none uppercase">
         Connect
