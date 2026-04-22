@@ -10,7 +10,7 @@ const DevDashboard = () => {
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Dev Portfolio Items</h1>
-        <Button  onClick={() => navigate('/dashboard/upload')}>
+        <Button  onClick={() => navigate('/dashboard/upload/dev')}>
           Add New
         </Button>
       </div>
