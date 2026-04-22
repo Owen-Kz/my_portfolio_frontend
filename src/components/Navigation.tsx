@@ -48,13 +48,13 @@ const Navigation = () => {
           flex items-center justify-between
           px-8 py-3 rounded-full
           border border-white/10
-          backdrop-blur-xl bg-black/20
+          backdrop-blur-xl bg-[#050505]/20
           ${isScrolled ? 'w-[95%] max-w-4xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]' : 'w-full max-w-7xl'}
         `}>
           {/* Logo */}
           <Link to="/" className="group flex items-center gap-2">
             <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-500">
-                {/* <div className="w-2 h-2 bg-black rounded-full" /> */}
+                {/* <div className="w-2 h-2 bg-[#050505] rounded-full" /> */}
                 <img src="https://res.cloudinary.com/dll8awuig/image/upload/v1758277912/portfolio/id_u3fqer5lh/m951gqhls5tm8qg5bg8b.png" alt="logo" />
             </div>
             <span className="text-xl font-black tracking-tighter text-white uppercase">
@@ -104,7 +104,7 @@ const Navigation = () => {
         ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
       `}>
         {/* Backdrop */}
-        <div className="absolute inset-0 bg-black/80 backdrop-blur-2xl" onClick={() => setIsMobileMenuOpen(false)} />
+        <div className="absolute inset-0 bg-[#050505]/80 backdrop-blur-2xl" onClick={() => setIsMobileMenuOpen(false)} />
         
         {/* Menu Content */}
         <div className={`
