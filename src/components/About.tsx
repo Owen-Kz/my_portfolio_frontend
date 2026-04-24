@@ -118,9 +118,9 @@ const About = () => {
                     ))}
                 </div>
 
-                <button className="mt-10 flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] hover:gap-4 transition-all">
-                    Download Portfolio <ArrowUpRight className="w-4 h-4" />
-                </button>
+                <a className="mt-10 flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] hover:gap-4 transition-all" href="https://www.behance.net/wk79#" target="_blank" rel="noopener noreferrer">
+                    See Outside thie Box <ArrowUpRight className="w-4 h-4" />
+                </a>
             </div>
           </div>
 
